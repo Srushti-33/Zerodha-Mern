@@ -1,11 +1,11 @@
 import React from 'react';
 import Hero from "./Hero";
-import Createticket from "./Createticket";
+import CreateTicket from "./CreateTicket";
 function SupportPage() {
     return ( 
         <>
         <Hero></Hero>
-        <Createticket></Createticket>
+        <CreateTicket></CreateTicket>
         </>
      );
 }
