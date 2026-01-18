@@ -9,14 +9,21 @@ const {HoldingsModel}=require('./model/HoldingsModel');
 const {PositionsModel}=require('./model/PositionsModel');
 const {OrdersModel}=require('./model/OrdersModel');
 
+const app=express();
+
 const PORT=process.env.PORT||3002;
 const uri=process.env.MONGO_URL;
 
-const app=express();
-
-
-
-app.use(cors());
+app.use(
+  cors({
+    origin: [
+      "http://localhost:3000",
+      "http://localhost:3001",
+      "https://zerodha-mern.netlify.app",
+    ],
+    credentials: true,
+  })
+);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -206,7 +213,7 @@ app.post('/newOrder',async(req,res)=>{
     mode:req.body.mode,    
     });
 
-    newOrder.save();
+    await newOrder.save();
     res.send("Order Saved")
 })
 
