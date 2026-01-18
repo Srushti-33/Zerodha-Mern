@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
+import {api} from "../../api";
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -34,15 +34,12 @@ const Signup = () => {
     setError("");
 
     try {
-      const { data } = await axios.post(
-        "http://localhost:3002/api/auth/signup",
-        {
-          email: formData.email,
-          password: formData.password,
-          username: formData.username,
-        },
-        { withCredentials: true }
-      );
+      const { data } = await api.post("/api/auth/signup", {
+      email: formData.email,
+      password: formData.password,
+      username: formData.username,
+});
+
 
       // even if success false, still go home
       if (data?.token) localStorage.setItem("token", data.token);
